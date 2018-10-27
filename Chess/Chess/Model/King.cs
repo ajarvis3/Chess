@@ -20,10 +20,12 @@ namespace Chess.Model
         /// </summary>
         /// <param name="row"> int representing start value for row </param>
         /// <param name="column"> int representing start value for column </param>
-        public King(int row, int column) : this()
+        /// <param name="owner"> string representing the owner of the piece </param>
+        public King(int row, int column, string owner) : this()
         {
             Row = row;
             Column = column;
+            Owner = owner;
         }
     }
 }

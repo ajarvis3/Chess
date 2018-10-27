@@ -19,8 +19,9 @@ namespace Chess.Model
             Column = 3;
             List<Movement> moves = new List<Movement>();
             NoJumpConstraint noJump = new NoJumpConstraint();
-            moves.Add(new Movement(1, 1, noJump));
-            moves.Add(new Movement(System.Int32.MaxValue, 1, noJump));
+            moves.Add(new Movement(1, 1, 1, noJump));
+            moves.Add(new Movement(0, 1, 1, noJump));
+            moves.Add(new Movement(1, 0, 1, noJump));
             PossibleMovements = moves;
         }
 

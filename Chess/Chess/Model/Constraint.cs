@@ -10,6 +10,11 @@ namespace Chess.Model
     /// </summary>
     interface IConstraint
     {
+        /// <summary>
+        /// Gets the instance of a Constraint 
+        /// </summary>
+        /// <returns></returns>
+        IConstraint GetConstraint();
 
         /// <summary>
         /// Tests to see if the constraint is satisfied

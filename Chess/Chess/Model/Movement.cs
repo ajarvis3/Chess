@@ -7,7 +7,8 @@ namespace Chess.Model
 {
     class Movement
     {
-        internal int AbsSlope { get; set; }
+        internal int AbsNumerator { get; set; }
+        internal int AbsDenominator { get; set; }
         internal int NumTimes { get; set; }
         internal IConstraint Cons { get; set; }
 
@@ -19,12 +20,14 @@ namespace Chess.Model
         /// <summary>
         /// Overloaded Constructor
         /// </summary>
-        /// <param name="slope"> the int representing slope that a piece can move </param>
+        /// <param name="numerator"> the int representing the numerator for a slope </param>
+        /// <param name="denominator"> the int representing the denominator for a slope </param>
         /// <param name="num"> the int representing the number of times a slop can be moved along </param>
         /// <param name="cons"> the Constraint that restricts movement for this slope </param>
-        public Movement (int slope, int num, IConstraint cons)
+        public Movement (int numerator, int denominator, int num, IConstraint cons)
         {
-            this.AbsSlope = slope;
+            this.AbsNumerator = numerator;
+            this.AbsDenominator = denominator;
             this.NumTimes = num;
             this.Cons = cons;
         }

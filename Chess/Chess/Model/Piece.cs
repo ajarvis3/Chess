@@ -12,6 +12,7 @@ namespace Chess.Model
         internal int Row { get; set; }
         internal int Column { get; set; }
         internal string Name { get; set; }
+        internal string Owner { get; set; }
         internal List<Movement> PossibleMovements { get; set; }
 
         /// <summary>
@@ -22,6 +23,7 @@ namespace Chess.Model
             this.Row = 0;
             this.Column = 0;
             this.Name = "Piece";
+            this.Owner = "Null";
         }
 
         /// <summary>
