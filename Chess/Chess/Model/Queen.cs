@@ -29,11 +29,13 @@ namespace Chess.Model
         /// <param name="row"> int representing start row </param>
         /// <param name="column"> int representing start column </param>
         /// <param name="owner"> string representing the owner of the piece </param>
-        public Queen(int row, int column, string owner) : this()
+        /// <param name="uniqueId"> the string with a uniqueId </param>
+        public Queen(int row, int column, string owner, string uniqueId) : this()
         {
             Row = row;
             Column = column;
             Owner = owner;
+            UniqueId = uniqueId;
         }
 
     }

@@ -23,9 +23,11 @@ namespace Chess.Model
             moves.Add(new Movement(-1, 0, 8));
             moves.Add(new Movement(0, -1, 8));
             IConstraint noJump = NoJumpConstraint.GetConstraint();
+            IConstraint unoc = UnoccupiedConstraint.GetConstraint();
             foreach (Movement m in moves)
             {
-                m.addConstraint(noJump);
+                m.AddConstraint(noJump);
+                m.AddConstraint(unoc);
             }
         }
 
@@ -35,11 +37,13 @@ namespace Chess.Model
         /// <param name="row"> int representing the start row </param>
         /// <param name="column"> int representing the start column </param>
         /// <param name="owner"> the string representing the owner </param>
-        public Rook(int row, int column, string owner) : this()
+        /// <param name="uniqueId"> the string with a uniqueId </param>
+        public Rook(int row, int column, string owner, string uniqueId) : this()
         {
             Row = row;
             Column = column;
             Owner = owner;
+            UniqueId = uniqueId;
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Chess.Model;
 using Chess.Controller;
 
 namespace Chess.Model
@@ -40,7 +39,7 @@ namespace Chess.Model
         /// Adds a constraint to this movement
         /// </summary>
         /// <param name="c"> the Constraint to be added </param>
-        public void addConstraint(IConstraint c)
+        public void AddConstraint(IConstraint c)
         {
             this.Cons.Add(c);
         }

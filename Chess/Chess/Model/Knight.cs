@@ -13,7 +13,7 @@ namespace Chess.Model
         /// </summary>
         public Knight() : base()
         {
-            Name = "Knight";
+            Name = "Night";
             List<Movement> moves = new List<Movement>();
             IConstraint unoc = UnoccupiedConstraint.GetConstraint();
             moves.Add(new Movement(2, 1, 1));
@@ -26,7 +26,7 @@ namespace Chess.Model
             moves.Add(new Movement(-1, -2, 1));
             foreach (Movement m in moves)
             {
-                m.addConstraint(unoc);
+                m.AddConstraint(unoc);
             }
         }
 
@@ -36,11 +36,13 @@ namespace Chess.Model
         /// <param name="row"> the int representing the row </param>
         /// <param name="column"> the int representing the column </param>
         /// <param name="owner"> the string representing the owner </param>
-        public Knight(int row, int column, string owner) : this()
+        /// <param name="uniqueId"> the string with a uniqueId </param>
+        public Knight(int row, int column, string owner, string uniqueId) : this()
         {
             Row = row;
             Column = column;
-            Owner = owner;            
+            Owner = owner;
+            UniqueId = uniqueId;
         }
     }
 }

@@ -41,7 +41,8 @@ namespace Chess.Views
         /// </summary>
         private static void PlayGame(string p1, string p2, BoardController bc)
         {
-            int currPlayer = 0;
+            //int currPlayer = 0;
+            Console.WriteLine(bc.MakeMove("pb1", 'b', 3, 1));
         }
 
         /// <summary>
@@ -55,6 +56,8 @@ namespace Chess.Views
             BoardController bc = new BoardController(p1, p2);
             PrintBoard(bc);
             PlayGame(p1, p2, bc);
+            PrintBoard(bc);
+            GetInput("Ready?");
         }
     }
 }

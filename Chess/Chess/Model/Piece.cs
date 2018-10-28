@@ -14,6 +14,7 @@ namespace Chess.Model
         internal int Column { get; set; }
         internal string Name { get; set; }
         internal string Owner { get; set; }
+        internal string UniqueId { get; set; }
         internal List<Movement> PossibleMovements { get; set; }
 
         /// <summary>
@@ -47,8 +48,9 @@ namespace Chess.Model
         /// <returns> The string representing this piece </returns>
         public override string ToString()
         {
-            string result = Name.Substring(0, 2);
+            string result = Name.Substring(0, 1);
             result = result + Owner.Substring(0, 1);
+            result = result + UniqueId;
             return result;
         }
     }

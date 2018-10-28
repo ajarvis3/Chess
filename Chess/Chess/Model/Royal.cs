@@ -31,8 +31,8 @@ namespace Chess.Model
             moves.Add(new Movement(-1, -1, 1));
             foreach (Movement m in moves)
             {
-                m.addConstraint(unoc);
-                m.addConstraint(noJump);
+                m.AddConstraint(unoc);
+                m.AddConstraint(noJump);
             }
             PossibleMovements = moves;
         }

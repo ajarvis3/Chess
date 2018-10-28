@@ -18,17 +18,19 @@ namespace Chess.Model
         /// <param name="upDown"> the int for whether the pawn moves up or down </param>
         public Pawn(int upDown) : base()
         {
-            Name = "Pawn";
+            Name = "pawn";
             Movement forward = new Movement(upDown, 0, 1);
-            forward.addConstraint(PawnUnoccupiedConstraint.GetConstraint());
+            forward.AddConstraint(PawnUnoccupiedConstraint.GetConstraint());
             Movement diag1 = new Movement(1, 1, 1);
             Movement diag2 = new Movement(1, -1, 1);
-            diag1.addConstraint(PawnEnemyDiagonalConstraint.GetConstraint());
-            diag2.addConstraint(PawnEnemyDiagonalConstraint.GetConstraint());
-            List<Movement> moves = new List<Movement>();
-            moves.Add(forward);
-            moves.Add(diag1);
-            moves.Add(diag2);
+            diag1.AddConstraint(PawnEnemyDiagonalConstraint.GetConstraint());
+            diag2.AddConstraint(PawnEnemyDiagonalConstraint.GetConstraint());
+            List<Movement> moves = new List<Movement>
+            {
+                forward,
+                diag1,
+                diag2
+            };
             PossibleMovements = moves;
         }
 
@@ -39,11 +41,13 @@ namespace Chess.Model
         /// <param name="column"> the int representing the start column </param>
         /// <param name="owner"> the string representing the owner </param>
         /// <param name="upDown"> the int for whether the pawn moves up or down </param>
-        public Pawn(int row, int column, string owner, int upDown) : this(upDown)
+        /// <param name="uniqueId"> the string with a unique identifier </param>
+        public Pawn(int row, int column, string owner, int upDown, string uniqueId) : this(upDown)
         {
             Row = row;
             Column = column;
             Owner = owner;
+            UniqueId = uniqueId;
         }
     }
 }
