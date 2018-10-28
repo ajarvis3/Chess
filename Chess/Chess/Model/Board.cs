@@ -48,5 +48,23 @@ namespace Chess.Model
                 throw e;
             }
         }
+
+        /// <summary>
+        /// Sets a specified board position to a given piece
+        /// </summary>
+        /// <param name="row"> the row to be changed </param>
+        /// <param name="column"> the column to be changed </param>
+        /// <param name="piece"> the object to take up the spot </param>
+        public void SetBoardPos(int row, int column, T piece)
+        {
+            try
+            {
+                Matrix[row, column] = piece;
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                throw e;
+            }
+        }
     }
 }

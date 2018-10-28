@@ -40,5 +40,16 @@ namespace Chess.Model
             this.Column = col;
             this.Name = name;
         }
+
+        /// <summary>
+        /// Returns a string representation of a piece
+        /// </summary>
+        /// <returns> The string representing this piece </returns>
+        public override string ToString()
+        {
+            string result = Name.Substring(0, 2);
+            result = result + Owner.Substring(0, 1);
+            return result;
+        }
     }
 }

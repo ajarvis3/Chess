@@ -13,12 +13,13 @@ namespace Chess.Model
     {
 
         /// <summary>
-        /// Default Constructor for Pawn
+        /// Overloaded Constructor for Pawn
         /// </summary>
-        public Pawn() : base()
+        /// <param name="upDown"> the int for whether the pawn moves up or down </param>
+        public Pawn(int upDown) : base()
         {
             Name = "Pawn";
-            Movement forward = new Movement(1, 0, 1);
+            Movement forward = new Movement(upDown, 0, 1);
             forward.addConstraint(PawnUnoccupiedConstraint.GetConstraint());
             Movement diag1 = new Movement(1, 1, 1);
             Movement diag2 = new Movement(1, -1, 1);
@@ -37,9 +38,12 @@ namespace Chess.Model
         /// <param name="row"> the int representing the start row </param>
         /// <param name="column"> the int representing the start column </param>
         /// <param name="owner"> the string representing the owner </param>
-        public Pawn(int row, int column, string owner) : this()
+        /// <param name="upDown"> the int for whether the pawn moves up or down </param>
+        public Pawn(int row, int column, string owner, int upDown) : this(upDown)
         {
-
+            Row = row;
+            Column = column;
+            Owner = owner;
         }
     }
 }

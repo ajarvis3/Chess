@@ -35,7 +35,7 @@ namespace Chess.Model
         /// <param name="row"> int representing the start row </param>
         /// <param name="column"> int representing the start column </param>
         /// <param name="owner"> the string representing the owner </param>
-        public Rook(int row, int column, string owner)
+        public Rook(int row, int column, string owner) : this()
         {
             Row = row;
             Column = column;

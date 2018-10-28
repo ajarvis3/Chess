@@ -63,7 +63,7 @@ namespace Chess.Controller
                 }
                 return true;
             }                
-            catch(IndexOutOfRangeException e)
+            catch(IndexOutOfRangeException)
             {
                 return false;
             }
