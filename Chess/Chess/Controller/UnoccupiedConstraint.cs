@@ -8,6 +8,15 @@ namespace Chess.Model
     {
         private static readonly UnoccupiedConstraint UNOC = new UnoccupiedConstraint();
 
+        /// <summary>
+        /// Private constructor to ensure that singleton is used
+        /// </summary>
+        private UnoccupiedConstraint() { }
+
+        /// <summary>
+        /// Gets the instance of this constraint
+        /// </summary>
+        /// <returns> the only instance of this constraint </returns>
         public static IConstraint GetConstraint()
         {
             return UNOC;

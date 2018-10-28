@@ -16,7 +16,14 @@ namespace Chess.Model
         /// </summary>
         private NoJumpConstraint() { }
 
-
+        /// <summary>
+        /// Gets the instance of the NoJumpConstraint
+        /// </summary>
+        /// <returns> the instance of the NoJumpConstraint </returns>
+        public static IConstraint GetConstraint()
+        {
+            return NoJump;
+        }
 
         /// <summary>
         /// Ensures that a piece does not move through/over other pieces
@@ -61,13 +68,5 @@ namespace Chess.Model
             }
         }
 
-        /// <summary>
-        /// Gets the instance of the NoJumpConstraint
-        /// </summary>
-        /// <returns> the instance of the NoJumpConstraint </returns>
-        public IConstraint GetConstraint()
-        {
-            return NoJump;
-        }
     }
 }
