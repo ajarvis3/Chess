@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Chess.Model;
 
-namespace Chess.Model
+namespace Chess.Controller
 {
+    /// <summary>
+    /// Checks that the spot on the board being moved to does not have a piece with the same owner.
+    /// </summary>
     class UnoccupiedConstraint : IConstraint
     {
-        private static readonly UnoccupiedConstraint UNOC = new UnoccupiedConstraint();
+        private static readonly UnoccupiedConstraint Unoc = new UnoccupiedConstraint();
 
         /// <summary>
         /// Private constructor to ensure that singleton is used
@@ -19,7 +23,7 @@ namespace Chess.Model
         /// <returns> the only instance of this constraint </returns>
         public static IConstraint GetConstraint()
         {
-            return UNOC;
+            return Unoc;
         }
 
         /// <summary>

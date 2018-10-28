@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Chess.Model;
 
-namespace Chess.Model
+namespace Chess.Controller
 {
     /// <summary>
     /// Acts as a way of restricting movement of pieces.

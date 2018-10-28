@@ -8,7 +8,8 @@ namespace Chess.Model
     {
 
         /// <summary>
-        /// Default Constructor
+        /// Default Constructor.
+        /// Most work handled by Royal
         /// </summary>
         public King() : base()
         {

@@ -1,12 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Chess.Controller;
 
 namespace Chess.Model
 {
+    /// <summary>
+    /// Represents the Queen piece in chess
+    /// </summary>
     class Queen : Royal
     {
 
+        /// <summary>
+        /// Default constructor for Queen.
+        /// </summary>
         public Queen() : base()
         {
             Name = "Queen";

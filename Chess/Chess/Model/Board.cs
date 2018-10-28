@@ -4,6 +4,10 @@ using System.Text;
 
 namespace Chess.Model
 {
+    /// <summary>
+    /// Represents a Generic 2D Board.
+    /// </summary>
+    /// <typeparam name="T"> The Type of pieces on the board </typeparam>
     class Board<T>
     {
         internal T[,] Matrix { get; set; }

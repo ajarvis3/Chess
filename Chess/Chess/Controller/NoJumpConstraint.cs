@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Chess.Model;
 
-namespace Chess.Model
+namespace Chess.Controller
 {
     /// <summary>
     /// Ensures that a piece does not move through or on top of another piece

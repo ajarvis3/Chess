@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Chess.Controller;
 
 namespace Chess.Model
 {
@@ -18,10 +19,21 @@ namespace Chess.Model
             Row = 0;
             Column = 3;
             List<Movement> moves = new List<Movement>();
-            NoJumpConstraint noJump = new NoJumpConstraint();
-            moves.Add(new Movement(1, 1, 1, noJump));
-            moves.Add(new Movement(0, 1, 1, noJump));
-            moves.Add(new Movement(1, 0, 1, noJump));
+            IConstraint noJump = NoJumpConstraint.GetConstraint();
+            IConstraint unoc = UnoccupiedConstraint.GetConstraint();
+            moves.Add(new Movement(1, 1, 1));
+            moves.Add(new Movement(0, 1, 1));
+            moves.Add(new Movement(1, 0, 1));
+            moves.Add(new Movement(1, -1, 1));
+            moves.Add(new Movement(0, -1, 1));
+            moves.Add(new Movement(-1, 0, 1));
+            moves.Add(new Movement(-1, 1, 1));
+            moves.Add(new Movement(-1, -1, 1));
+            foreach (Movement m in moves)
+            {
+                m.addConstraint(unoc);
+                m.addConstraint(noJump);
+            }
             PossibleMovements = moves;
         }
 
