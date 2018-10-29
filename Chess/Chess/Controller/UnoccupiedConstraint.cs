@@ -37,7 +37,7 @@ namespace Chess.Controller
         public bool ConstraintSatisfied(Piece piece, int toRow, int toCol, Board<Piece> board)
         {
             Piece other = board.GetBoardPos(toRow, toCol);
-            if (other.Equals(default(Piece)))
+            if (other == default(Piece))
             {
                 return true;
             }

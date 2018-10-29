@@ -54,7 +54,7 @@ namespace Chess.Controller
                 c = piece.Column + cInc;
                 while (r != toRow && c != toCol)
                 {
-                    if (!board.GetBoardPos(r, c).Equals(default(Piece)))
+                    if (!(board.GetBoardPos(r, c) == default(Piece)))
                     {
                         return false;
                     }
@@ -63,7 +63,7 @@ namespace Chess.Controller
                 }
                 return true;
             }                
-            catch(IndexOutOfRangeException)
+            catch(Exception)
             {
                 return false;
             }

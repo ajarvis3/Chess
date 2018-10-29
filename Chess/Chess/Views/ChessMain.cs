@@ -42,7 +42,9 @@ namespace Chess.Views
         private static void PlayGame(string p1, string p2, BoardController bc)
         {
             //int currPlayer = 0;
-            Console.WriteLine(bc.MakeMove("pb1", 'b', 3, 1));
+            
+            Console.WriteLine(bc.MakeMove("Qb0", 'b', 3, 2));
+            Console.WriteLine(bc.GetPossibleMovements("Qb0", 'b'));
         }
 
         /// <summary>

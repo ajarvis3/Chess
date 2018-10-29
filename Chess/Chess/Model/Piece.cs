@@ -16,6 +16,7 @@ namespace Chess.Model
         internal string Owner { get; set; }
         internal string UniqueId { get; set; }
         internal List<Movement> PossibleMovements { get; set; }
+        internal List<IndexBundle> PossibleIndices { get; set; }
 
         /// <summary>
         /// Default Constructor
@@ -26,6 +27,8 @@ namespace Chess.Model
             this.Column = 0;
             this.Name = "Piece";
             this.Owner = "Null";
+            this.PossibleMovements = new List<Movement>();
+            this.PossibleIndices = new List<IndexBundle>();
         }
 
         /// <summary>
@@ -40,6 +43,16 @@ namespace Chess.Model
             this.Row = row;
             this.Column = col;
             this.Name = name;
+        }
+
+        /// <summary>
+        /// Adds possible IndexBundle thingys to move to
+        /// </summary>
+        /// <param name="bundle"> The IndexBundles to be added </param>
+        public void AddIndices(List<IndexBundle> bundle)
+        {
+            
+            PossibleIndices.AddRange(bundle);
         }
 
         /// <summary>

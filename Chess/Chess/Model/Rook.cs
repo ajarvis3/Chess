@@ -29,6 +29,7 @@ namespace Chess.Model
                 m.AddConstraint(noJump);
                 m.AddConstraint(unoc);
             }
+            PossibleMovements = moves;
         }
 
         /// <summary>

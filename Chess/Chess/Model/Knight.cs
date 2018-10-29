@@ -28,6 +28,7 @@ namespace Chess.Model
             {
                 m.AddConstraint(unoc);
             }
+            PossibleMovements = moves;
         }
 
         /// <summary>

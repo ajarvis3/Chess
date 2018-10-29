@@ -13,8 +13,8 @@ namespace Chess.Controller
     {
         private static readonly int N = 8;
         private Board<Piece> Board;
-        private List<Piece> Player1;
-        private List<Piece> Player2;
+        private Dictionary<string, Piece> Player1;
+        private Dictionary<string, Piece> Player2;
         private string P1Name;
         private string P2Name;
 
@@ -24,8 +24,8 @@ namespace Chess.Controller
         private BoardController()
         {
             this.Board = new Board<Piece>(N, N);
-            this.Player1 = new List<Piece>();
-            this.Player2 = new List<Piece>();
+            this.Player1 = new Dictionary<string, Piece>();
+            this.Player2 = new Dictionary<string, Piece>();
         }
 
         /// <summary>
@@ -48,27 +48,17 @@ namespace Chess.Controller
         /// <returns> Returns the bool for whether the game is over </returns>
         public bool IsGameOver()
         {
-            bool flag = false;
-            foreach (Piece p in Player1)
-            {
-                if (p.Name.Equals("King"))
-                {
-                    flag = true;
-                    break;
-                }
-            }
-            if (!flag)
-            {
-                return false;
-            }
-            foreach (Piece p in Player2)
-            {
-                if (p.Name.Equals("King"))
-                {
-                    return true;
-                }
-            }
-            return false;
+            return !Player1.ContainsKey("K" + P1Name.ToCharArray()[0] + "0") || !Player2.ContainsKey("K" + P2Name.ToCharArray()[0] + "0");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dict"></param>
+        /// <param name="p"></param>
+        private void AddToDictionary(Dictionary<string, Piece> dict, Piece p)
+        {
+            dict.Add(p.ToString(), p);
         }
 
         /// <summary>
@@ -76,21 +66,21 @@ namespace Chess.Controller
         /// </summary>
         private void SetUpPlayer1()
         {
-            Player1.Add(new Rook(0, 0, P1Name, "0"));
-            Player1.Add(new Knight(0, 1, P1Name, "0"));
-            Player1.Add(new Bishop(0, 2, P1Name, "0"));
-            Player1.Add(new Queen(0, 3, P1Name, "0"));
-            Player1.Add(new King(0, 4, P1Name, "0"));
-            Player1.Add(new Bishop(0, 5, P1Name, "1"));
-            Player1.Add(new Knight(0, 6, P1Name, "1"));
-            Player1.Add(new Rook(0, 7, P1Name, "1"));
+            AddToDictionary(Player1, new Rook(0, 0, P1Name, "0"));
+            AddToDictionary(Player1, new Knight(0, 1, P1Name, "0"));
+            AddToDictionary(Player1, new Bishop(0, 2, P1Name, "0"));
+            AddToDictionary(Player1, new Queen(0, 3, P1Name, "0"));
+            AddToDictionary(Player1, new King(0, 4, P1Name, "0"));
+            AddToDictionary(Player1, new Bishop(0, 5, P1Name, "1"));
+            AddToDictionary(Player1, new Knight(0, 6, P1Name, "1"));
+            AddToDictionary(Player1, new Rook(0, 7, P1Name, "1"));
             for (int i = 0; i < 8; i++)
             {
-                Player1.Add(new Pawn(1, i, P1Name, 1, i.ToString()));
+                AddToDictionary(Player1, new Pawn(1, i, P1Name, 1, i.ToString()));
             }
-            foreach (Piece p in Player1)
+            foreach (KeyValuePair<string, Piece> p in Player1)
             {
-                Board.SetBoardPos(p.Row, p.Column, p);
+                Board.SetBoardPos(p.Value.Row, p.Value.Column, p.Value);
             }
         }
 
@@ -99,22 +89,129 @@ namespace Chess.Controller
         /// </summary>
         private void SetUpPlayer2()
         {
-            Player2.Add(new Rook(7, 0, P2Name, "0"));
-            Player2.Add(new Knight(7, 1, P2Name, "0"));
-            Player2.Add(new Bishop(7, 2, P2Name, "0"));
-            Player2.Add(new Queen(7, 3, P2Name, "0"));
-            Player2.Add(new King(7, 4, P2Name, "0"));
-            Player2.Add(new Bishop(7, 5, P2Name, "1"));
-            Player2.Add(new Knight(7, 6, P2Name, "1"));
-            Player2.Add(new Rook(7, 7, P2Name, "1"));
+            AddToDictionary(Player2, new Rook(7, 0, P2Name, "0"));
+            AddToDictionary(Player2, new Knight(7, 1, P2Name, "0"));
+            AddToDictionary(Player2, new Bishop(7, 2, P2Name, "0"));
+            AddToDictionary(Player2, new Queen(7, 3, P2Name, "0"));
+            AddToDictionary(Player2, new King(7, 4, P2Name, "0"));
+            AddToDictionary(Player2, new Bishop(7, 5, P2Name, "1"));
+            AddToDictionary(Player2, new Knight(7, 6, P2Name, "1"));
+            AddToDictionary(Player2, new Rook(7, 7, P2Name, "1"));
             for (int i = 0; i < 8; i++)
             {
-                Player2.Add(new Pawn(6, i, P2Name, -1, i.ToString()));
+                AddToDictionary(Player2, new Pawn(6, i, P2Name, -1, i.ToString()));
             }
-            foreach (Piece p in Player2)
+            foreach (KeyValuePair<string, Piece> p in Player2)
             {
-                Board.SetBoardPos(p.Row, p.Column, p);
+                Board.SetBoardPos(p.Value.Row, p.Value.Column, p.Value);
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        private List<IndexBundle> PossibleMovementHelper(Piece p, Movement m)
+        {
+            List<IndexBundle> bundle = new List<IndexBundle>();
+            int initRow = p.Row;
+            int initCol = p.Column;
+            int numer = m.Numerator;
+            int denom = m.Denominator;
+            List<IConstraint> cons = m.Cons;
+            for (int i = 1; i <= m.NumTimes; i++)
+            {
+                int tNum = numer * i;
+                int tDen = denom * i;
+                bool flag = true;
+                foreach (IConstraint c in cons)
+                {
+                    try
+                    {
+                        if (!c.ConstraintSatisfied
+                            (p, initRow + tNum, initCol + tDen, Board))
+                        {
+                            flag = false;
+                            break;
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        flag = false;
+                    }
+                }
+                if (flag)
+                {
+                    bundle.Add(new IndexBundle(initRow + tNum, initCol + tDen));
+                }
+            }
+            p.AddIndices(bundle);
+            return bundle;
+        }
+
+        /// <summary>
+        /// Gets the possible movements for a given piece.
+        /// Can probably refactor some of the information into other methods.
+        /// </summary>
+        /// <param name="piece"> The piece someone is trying to move </param>
+        /// <param name="player"> The player trying to move the piece </param>
+        /// <returns></returns>
+        public string GetPossibleMovements(string piece, char player)
+        {
+            List<IndexBundle> bundle = new List<IndexBundle>();
+            char c = piece.ToCharArray()[1];
+            string ret = "";
+            if (c != player)
+            {
+                ret = "Not your piece!";
+            }
+            else if (player == P1Name.ToCharArray()[0])
+            {                
+                if (!Player1.ContainsKey(piece))
+                {
+                    ret = "Piece does not exist!";
+                }
+                else
+                {
+                    Piece p = Player1[piece];
+                    List<Movement> moves = p.PossibleMovements;
+                    foreach (Movement m in moves)
+                    {
+                        bundle.AddRange(PossibleMovementHelper(p, m));
+                    }
+                    ret = "[";
+                    foreach (IndexBundle b in bundle)
+                    {
+                        ret = ret + b.ToString() + " ";
+                    }
+                    ret = ret + "]";
+                }
+            }
+            else
+            {                
+                if (!Player2.ContainsKey(piece))
+                {
+                    ret = "Piece does not exist!";
+                }
+                else
+                {
+                    Piece p = Player2[piece];
+                    List<Movement> moves = new List<Movement>();
+                    foreach (Movement m in moves)
+                    {
+                        bundle.AddRange(PossibleMovementHelper(p, m));
+                    }
+                    ret = "[";
+                    foreach (IndexBundle b in bundle)
+                    {
+                        ret = ret + b.ToString() + " ";
+                    }
+                    ret = ret + "]";
+                }
+            }
+            return ret;
         }
 
         /// <summary>
@@ -129,36 +226,33 @@ namespace Chess.Controller
         {
             try
             {
-                char c = piece.ToCharArray()[1];
-                if (c != player)
-                {
-                    return "Not your piece!";
-                }
                 if (player == P1Name.ToCharArray()[0])
                 {
-                    Piece p = null;
-                    foreach (Piece pie in Player1)
+                    try
                     {
-                        if (pie.ToString().Equals(piece))
-                        {
-                            p = pie;
-                            break;
-                        }
+                        Piece p = Player1[piece];
+                        // check for valid move
+                        Board.SetBoardPos(p.Row, p.Column, default(Piece));
+                        Board.SetBoardPos(toRow, toCol, p);
+                        p.Row = toRow;
+                        p.Column = toCol;
                     }
-                    if (p == null)
+                    catch
                     {
-                        return "Piece does not exist!";
+                        return "Piece Does Not Exist";
                     }
-                    List<Movement> moves = p.PossibleMovements;
-                    // check for valid move
+                }
+                else
+                {
+                    if (!Player2.ContainsKey(piece))
+                    {
+                        return "Piece doesn't exist";
+                    }
+                    Piece p = Player2[piece];
                     Board.SetBoardPos(p.Row, p.Column, default(Piece));
                     Board.SetBoardPos(toRow, toCol, p);
                     p.Row = toRow;
                     p.Column = toCol;
-                }
-                else
-                {
-
                 }
                 return "";
             }
@@ -186,7 +280,7 @@ namespace Chess.Controller
                     }
                     catch(NullReferenceException)
                     {
-                        res += "XX ";
+                        res += "XXX ";
                     }
                 }
                 res += "\n";

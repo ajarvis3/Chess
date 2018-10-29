@@ -39,11 +39,18 @@ namespace Chess.Controller
         /// <returns></returns>
         public bool ConstraintSatisfied(Piece piece, int toRow, int toCol, Board<Piece> board)
         {
-            if (board.GetBoardPos(toRow, toCol).Equals(default(Piece)))
+            try
+            {
+                if (board.GetBoardPos(toRow, toCol).Equals(default(Piece)))
+                {
+                    return false;
+                }
+                return !board.GetBoardPos(toRow, toCol).Owner.Equals(piece.Owner);
+            }
+            catch (NullReferenceException)
             {
                 return false;
             }
-            return !board.GetBoardPos(toRow, toCol).Owner.Equals(piece.Owner);
         }
     }
 }
