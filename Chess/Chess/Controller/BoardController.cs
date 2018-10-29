@@ -198,7 +198,7 @@ namespace Chess.Controller
                 else
                 {
                     Piece p = Player2[piece];
-                    List<Movement> moves = new List<Movement>();
+                    List<Movement> moves = p.PossibleMovements;
                     foreach (Movement m in moves)
                     {
                         bundle.AddRange(PossibleMovementHelper(p, m));
